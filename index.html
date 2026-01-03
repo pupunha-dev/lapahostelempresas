@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lapa Hostel Empresas | Hospedagem Corporativa na Lapa-PR</title>
+    <meta
+      name="description"
+      content="Hospedagem especializada para empresas e grandes equipes na Lapa, Paraná. Atendimento automatizado e gestão corporativa."
+    />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome for Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Custom Config for Tailwind Colors based on typical Lapa aesthetics + Corporate -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "lapa-blue": "#1e293b" /* Slate 800 - Professional/Corporate */,
+              "lapa-gold": "#d97706" /* Amber 600 - Warmth/Historic Stone */,
+              "lapa-light": "#f8fafc",
+            },
+            fontFamily: {
+              sans: ['"Open Sans"', "sans-serif"],
+              heading: ['"Montserrat"', "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* Smooth Scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Chat Widget Animations */
+      @keyframes float {
+        0% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+        100% {
+          transform: translateY(0px);
+        }
+      }
+
+      .chat-float {
+        animation: float 3s ease-in-out infinite;
+      }
+
+      /* Gallery Scrollbar Hide */
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      /* Gradient Overlay for Hero */
+      .hero-overlay {
+        background: linear-gradient(
+          to right,
+          rgba(30, 41, 59, 0.9),
+          rgba(30, 41, 59, 0.6)
+        );
+      }
+    </style>
+  </head>
+  <body
+    class="bg-lapa-light text-slate-700 antialiased selection:bg-lapa-gold selection:text-white"
+  >
+    <!-- HEADER -->
+    <header
+      class="fixed w-full z-50 bg-white/95 backdrop-blur-sm shadow-sm transition-all duration-300"
+      id="navbar"
+    >
+      <div
+        class="container mx-auto px-6 py-4 flex justify-between items-center"
+      >
+        <!-- Logo Simulation -->
+        <a href="#" class="flex items-center gap-2 group">
+          <div
+            class="bg-lapa-blue text-white w-10 h-10 flex items-center justify-center rounded font-heading font-bold text-xl group-hover:bg-lapa-gold transition-colors"
+          >
+            L
+          </div>
+          <div class="flex flex-col">
+            <span
+              class="font-heading font-bold text-lapa-blue text-lg leading-tight uppercase tracking-wide"
+              >Lapa Hostel</span
+            >
+            <span
+              class="text-xs text-lapa-gold font-bold tracking-[0.2em] uppercase"
+              >Empresas</span
+            >
+          </div>
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden md:flex gap-8 items-center">
+          <a
+            href="#hero"
+            class="text-sm font-semibold text-slate-600 hover:text-lapa-gold transition-colors"
+            >Início</a
+          >
+          <a
+            href="#sobre"
+            class="text-sm font-semibold text-slate-600 hover:text-lapa-gold transition-colors"
+            >Acomodações</a
+          >
+          <a
+            href="#localizacao"
+            class="text-sm font-semibold text-slate-600 hover:text-lapa-gold transition-colors"
+            >Localização</a
+          >
+          <button
+            onclick="toggleChat()"
+            class="bg-lapa-gold hover:bg-amber-700 text-white text-sm font-bold py-2 px-5 rounded-full transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+          >
+            <i class="fa-solid fa-robot mr-2"></i> Atendimento Inteligente
+          </button>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <button
+          class="md:hidden text-lapa-blue text-2xl"
+          onclick="document.getElementById('mobile-menu').classList.toggle('hidden')"
+        >
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Menu Dropdown -->
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden bg-white border-t border-gray-100 p-4 shadow-lg"
+      >
+        <div class="flex flex-col gap-4">
+          <a href="#hero" class="text-slate-600 font-semibold">Início</a>
+          <a href="#sobre" class="text-slate-600 font-semibold">Acomodações</a>
+          <a href="#localizacao" class="text-slate-600 font-semibold"
+            >Localização</a
+          >
+          <button onclick="toggleChat()" class="text-lapa-gold font-bold">
+            Falar com IA
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section
+      id="hero"
+      class="relative h-screen min-h-[600px] flex items-center pt-20"
+    >
+      <!-- Background Image (Placeholder for Lapa/Hostel) -->
+      <div class="absolute inset-0 z-0">
+        <img
+          src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
+          alt="Fachada Hostel Lapa"
+          class="w-full h-full object-cover"
+        />
+        <div class="hero-overlay absolute inset-0"></div>
+      </div>
+
+      <div
+        class="container mx-auto px-6 relative z-10 grid md:grid-cols-2 gap-12 items-center"
+      >
+        <div class="text-white">
+          <div
+            class="inline-block bg-lapa-gold/20 border border-lapa-gold text-lapa-gold px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-6"
+          >
+            Especialistas em Público Corporativo
+          </div>
+          <h1
+            class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6"
+          >
+            Hospedagem Estratégica na
+            <span class="text-lapa-gold">Lapa, PR</span>
+          </h1>
+          <p class="text-slate-300 text-lg mb-8 max-w-lg leading-relaxed">
+            Recebemos grandes equipes e empresas com infraestrutura completa,
+            contratos flexíveis e localização privilegiada no centro histórico.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <button
+              onclick="toggleChat()"
+              class="bg-lapa-gold text-white font-bold py-4 px-8 rounded hover:bg-amber-700 transition-all shadow-lg flex items-center justify-center gap-3 text-lg group"
+            >
+              <span>Iniciar Atendimento</span>
+              <i
+                class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"
+              ></i>
+            </button>
+            <a
+              href="#galeria"
+              class="border border-white/30 hover:bg-white/10 text-white font-semibold py-4 px-8 rounded transition-all flex items-center justify-center"
+            >
+              Ver Estrutura
+            </a>
+          </div>
+          <p class="mt-6 text-sm text-slate-400">
+            <i class="fa-solid fa-circle-check text-lapa-gold mr-2"></i> Tire
+            dúvidas sobre regras e contratos em segundos com nossa IA.
+          </p>
+        </div>
+
+        <!-- Floating Agent Teaser (Desktop) -->
+        <div class="hidden md:block">
+          <div
+            class="bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-2xl shadow-2xl max-w-sm ml-auto transform rotate-2 hover:rotate-0 transition-all duration-500 cursor-pointer"
+            onclick="toggleChat()"
+          >
+            <div class="flex items-center gap-4 mb-4">
+              <div
+                class="w-12 h-12 bg-lapa-gold rounded-full flex items-center justify-center relative"
+              >
+                <i class="fa-solid fa-headset text-white text-xl"></i>
+                <span
+                  class="absolute bottom-0 right-0 w-3 h-3 bg-green-400 border-2 border-lapa-blue rounded-full"
+                ></span>
+              </div>
+              <div>
+                <p class="text-white font-bold font-heading">Agente Virtual</p>
+                <p class="text-green-400 text-xs">Online agora</p>
+              </div>
+            </div>
+            <div class="bg-white/90 p-3 rounded-lg rounded-tl-none mb-2">
+              <p class="text-sm text-slate-700">
+                Olá! Precisa hospedar sua equipe na Lapa? Posso te passar os
+                valores e regras agora mesmo.
+              </p>
+            </div>
+            <div class="text-center mt-4">
+              <span
+                class="text-white text-sm font-semibold border-b border-lapa-gold pb-1 hover:text-lapa-gold transition-colors"
+                >Clique para responder</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY SECTION -->
+    <section id="galeria" class="py-20 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="flex justify-between items-end mb-12">
+          <div>
+            <h2 class="font-heading text-3xl font-bold text-lapa-blue mb-2">
+              Nossa Estrutura
+            </h2>
+            <p class="text-slate-500">
+              Pronto para receber sua equipe com conforto e praticidade.
+            </p>
+          </div>
+          <div class="flex gap-2">
+            <button
+              onclick="scrollGallery('left')"
+              class="w-10 h-10 border border-slate-200 rounded-full flex items-center justify-center hover:bg-lapa-blue hover:text-white transition-colors"
+            >
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button
+              onclick="scrollGallery('right')"
+              class="w-10 h-10 border border-slate-200 rounded-full flex items-center justify-center hover:bg-lapa-blue hover:text-white transition-colors"
+            >
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Carousel Container -->
+        <div
+          id="gallery-container"
+          class="flex gap-6 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-8"
+        >
+          <!-- Item 1 -->
+          <div
+            class="min-w-[85%] md:min-w-[400px] h-[300px] rounded-xl overflow-hidden snap-center relative group cursor-pointer"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              alt="Quarto Coletivo"
+            />
+            <div
+              class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-6"
+            >
+              <h3 class="text-white font-heading font-bold">
+                Acomodações Coletivas
+              </h3>
+              <p class="text-slate-300 text-sm">
+                Espaço otimizado para equipes
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div
+            class="min-w-[85%] md:min-w-[400px] h-[300px] rounded-xl overflow-hidden snap-center relative group cursor-pointer"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              alt="Área de Trabalho"
+            />
+            <div
+              class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-6"
+            >
+              <h3 class="text-white font-heading font-bold">
+                Área de Trabalho
+              </h3>
+              <p class="text-slate-300 text-sm">Wi-fi de alta velocidade</p>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div
+            class="min-w-[85%] md:min-w-[400px] h-[300px] rounded-xl overflow-hidden snap-center relative group cursor-pointer"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              alt="Fachada Lapa"
+            />
+            <div
+              class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-6"
+            >
+              <h3 class="text-white font-heading font-bold">
+                Localização Histórica
+              </h3>
+              <p class="text-slate-300 text-sm">No coração da Lapa-PR</p>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div
+            class="min-w-[85%] md:min-w-[400px] h-[300px] rounded-xl overflow-hidden snap-center relative group cursor-pointer"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1596203928120-e4b787590d64?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              alt="Área de Convivência"
+            />
+            <div
+              class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-6"
+            >
+              <h3 class="text-white font-heading font-bold">Convivência</h3>
+              <p class="text-slate-300 text-sm">Ambiente seguro e integrado</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOCATION & INFO -->
+    <section
+      id="localizacao"
+      class="bg-lapa-blue py-20 text-white relative overflow-hidden"
+    >
+      <!-- Decoration -->
+      <div
+        class="absolute top-0 right-0 w-64 h-64 bg-lapa-gold opacity-10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"
+      ></div>
+
+      <div
+        class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center"
+      >
+        <div>
+          <h2 class="font-heading text-3xl font-bold mb-6">
+            Localização Estratégica
+          </h2>
+          <p class="text-slate-300 mb-6 leading-relaxed">
+            Situado no centro histórico da Lapa, facilitando o deslocamento para
+            os polos industriais da região e oferecendo acesso rápido a serviços
+            essenciais.
+          </p>
+
+          <ul class="space-y-4 mb-8">
+            <li class="flex items-start gap-4">
+              <div
+                class="w-10 h-10 rounded bg-white/10 flex items-center justify-center shrink-0"
+              >
+                <i class="fa-solid fa-map-pin text-lapa-gold"></i>
+              </div>
+              <div>
+                <h4 class="font-bold">Endereço</h4>
+                <p class="text-sm text-slate-400">
+                  Rua Histórica, 123 - Centro, Lapa - PR
+                </p>
+              </div>
+            </li>
+            <li class="flex items-start gap-4">
+              <div
+                class="w-10 h-10 rounded bg-white/10 flex items-center justify-center shrink-0"
+              >
+                <i class="fa-solid fa-file-contract text-lapa-gold"></i>
+              </div>
+              <div>
+                <h4 class="font-bold">Contratos Flexíveis</h4>
+                <p class="text-sm text-slate-400">
+                  Diárias, quinzenais ou mensais.
+                </p>
+              </div>
+            </li>
+          </ul>
+          <button
+            onclick="toggleChat()"
+            class="text-lapa-gold font-bold hover:text-white transition-colors border-b border-lapa-gold pb-1"
+          >
+            Ver política no Chat &rarr;
+          </button>
+        </div>
+
+        <!-- Map Placeholder -->
+        <div
+          class="h-[300px] w-full bg-slate-700 rounded-2xl overflow-hidden relative shadow-2xl"
+        >
+          <!-- Simulating a Map -->
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57574.6094622119!2d-49.75620805136718!3d-25.77099999999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dd02fd22485537%3A0x6a0c0e86b9f2910!2sLapa%2C%20PR!5e0!3m2!1spt-BR!2sbr!4v1709400000000!5m2!1spt-BR!2sbr"
+            width="100%"
+            height="100%"
+            style="border: 0; filter: grayscale(100%) contrast(1.2)"
+            allowfullscreen=""
+            loading="lazy"
+          >
+          </iframe>
+          <div
+            class="absolute bottom-4 left-4 bg-white text-slate-800 p-2 rounded shadow text-xs font-bold"
+          >
+            Lapa Hostel Empresas
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-500 py-12 border-t border-white/5">
+      <div class="container mx-auto px-6 text-center md:text-left">
+        <div
+          class="flex flex-col md:flex-row justify-between items-center gap-6"
+        >
+          <div>
+            <h3 class="text-white font-heading font-bold text-lg mb-1">
+              Lapa Hostel Empresas
+            </h3>
+            <p class="text-sm">Soluções em hospedagem corporativa.</p>
+          </div>
+          <div class="flex gap-6">
+            <a href="#" class="hover:text-lapa-gold transition-colors"
+              ><i class="fa-brands fa-instagram text-xl"></i
+            ></a>
+            <a href="#" class="hover:text-lapa-gold transition-colors"
+              ><i class="fa-brands fa-whatsapp text-xl"></i
+            ></a>
+            <a href="#" class="hover:text-lapa-gold transition-colors"
+              ><i class="fa-regular fa-envelope text-xl"></i
+            ></a>
+          </div>
+        </div>
+        <div class="mt-8 pt-8 border-t border-white/5 text-center text-xs">
+          &copy; 2024 Lapa Hostel. Todos os direitos reservados.
+        </div>
+      </div>
+    </footer>
+
+    <!-- AI CHAT WIDGET (Simulated) -->
+    <!-- Trigger Button -->
+    <div class="fixed bottom-6 right-6 z-40">
+      <button
+        onclick="toggleChat()"
+        class="chat-float bg-lapa-gold w-16 h-16 rounded-full flex items-center justify-center text-white shadow-2xl hover:bg-amber-700 transition-colors relative group"
+      >
+        <i class="fa-solid fa-comments text-2xl"></i>
+        <span
+          class="absolute -top-2 -right-2 bg-red-500 w-5 h-5 rounded-full text-[10px] font-bold flex items-center justify-center animate-pulse"
+          >1</span
+        >
+      </button>
+    </div>
+
+    <!-- Chat Interface -->
+    <div
+      id="ai-chat-window"
+      class="fixed bottom-24 right-6 w-[90%] md:w-[380px] bg-white rounded-2xl shadow-2xl z-50 hidden flex-col border border-slate-100 transform transition-all duration-300 origin-bottom-right scale-95 opacity-0"
+    >
+      <!-- Chat Header -->
+      <div
+        class="bg-lapa-blue p-4 rounded-t-2xl flex justify-between items-center"
+      >
+        <div class="flex items-center gap-3">
+          <div class="bg-white/20 p-2 rounded-full">
+            <i class="fa-solid fa-robot text-white"></i>
+          </div>
+          <div>
+            <h4 class="text-white font-bold font-heading text-sm">
+              Agente Lapa Hostel
+            </h4>
+            <p class="text-green-400 text-xs flex items-center gap-1">
+              <span class="w-2 h-2 bg-green-400 rounded-full"></span> Online
+            </p>
+          </div>
+        </div>
+        <button onclick="toggleChat()" class="text-white/70 hover:text-white">
+          <i class="fa-solid fa-times"></i>
+        </button>
+      </div>
+
+      <!-- Chat Body -->
+      <div
+        class="h-[350px] overflow-y-auto p-4 bg-slate-50 flex flex-col gap-3"
+        id="chat-messages"
+      >
+        <div class="text-center text-xs text-slate-400 my-2">Hoje</div>
+
+        <!-- Message AI -->
+        <div class="flex gap-2 max-w-[85%]">
+          <div
+            class="w-8 h-8 bg-lapa-blue rounded-full flex items-center justify-center shrink-0 mt-1"
+          >
+            <span class="text-white text-xs font-bold">LH</span>
+          </div>
+          <div
+            class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm border border-slate-100"
+          >
+            <p class="text-sm text-slate-700">
+              Olá! Bem-vindo ao Lapa Hostel Empresas. 🏢
+            </p>
+          </div>
+        </div>
+
+        <!-- Message AI Delay -->
+        <div class="flex gap-2 max-w-[85%]">
+          <div
+            class="w-8 h-8 bg-lapa-blue rounded-full flex items-center justify-center shrink-0 mt-1"
+          >
+            <span class="text-white text-xs font-bold">LH</span>
+          </div>
+          <div
+            class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm border border-slate-100"
+          >
+            <p class="text-sm text-slate-700">
+              Sou sua assistente virtual. Posso te ajudar com valores,
+              disponibilidade para grupos ou regras da casa. O que você precisa
+              saber?
+            </p>
+          </div>
+        </div>
+
+        <!-- Suggested Actions -->
+        <div class="flex flex-wrap gap-2 mt-2 ml-10">
+          <button
+            class="text-xs bg-lapa-gold/10 text-lapa-gold hover:bg-lapa-gold hover:text-white border border-lapa-gold/30 px-3 py-1.5 rounded-full transition-colors"
+          >
+            Valores para empresas
+          </button>
+          <button
+            class="text-xs bg-lapa-gold/10 text-lapa-gold hover:bg-lapa-gold hover:text-white border border-lapa-gold/30 px-3 py-1.5 rounded-full transition-colors"
+          >
+            Ver fotos
+          </button>
+          <button
+            class="text-xs bg-lapa-gold/10 text-lapa-gold hover:bg-lapa-gold hover:text-white border border-lapa-gold/30 px-3 py-1.5 rounded-full transition-colors"
+          >
+            Falar com humano
+          </button>
+        </div>
+      </div>
+
+      <!-- Chat Input -->
+      <div class="p-3 border-t border-slate-100 bg-white rounded-b-2xl">
+        <form
+          onsubmit="event.preventDefault(); sendMessage();"
+          class="flex gap-2"
+        >
+          <input
+            type="text"
+            id="chat-input"
+            placeholder="Digite sua dúvida..."
+            class="flex-1 bg-slate-100 border-none rounded-full px-4 py-2 text-sm focus:ring-2 focus:ring-lapa-gold outline-none"
+          />
+          <button
+            type="submit"
+            class="bg-lapa-blue text-white w-9 h-9 rounded-full flex items-center justify-center hover:bg-lapa-gold transition-colors"
+          >
+            <i class="fa-solid fa-paper-plane text-xs"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script>
+      // Toggle Chat Logic
+      let isChatOpen = false;
+      const chatWindow = document.getElementById("ai-chat-window");
+
+      function toggleChat() {
+        isChatOpen = !isChatOpen;
+        if (isChatOpen) {
+          chatWindow.classList.remove("hidden");
+          // Small delay to allow display:block to apply before animating opacity
+          setTimeout(() => {
+            chatWindow.classList.remove("scale-95", "opacity-0");
+            chatWindow.classList.add("scale-100", "opacity-100");
+            document.getElementById("chat-input").focus();
+          }, 10);
+        } else {
+          chatWindow.classList.remove("scale-100", "opacity-100");
+          chatWindow.classList.add("scale-95", "opacity-0");
+          setTimeout(() => {
+            chatWindow.classList.add("hidden");
+          }, 300);
+        }
+      }
+
+      // Gallery Scroll Logic
+      function scrollGallery(direction) {
+        const container = document.getElementById("gallery-container");
+        const scrollAmount = 300;
+        if (direction === "left") {
+          container.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+        } else {
+          container.scrollBy({ left: scrollAmount, behavior: "smooth" });
+        }
+      }
+
+      // Mock Send Message Function
+      function sendMessage() {
+        const input = document.getElementById("chat-input");
+        const messages = document.getElementById("chat-messages");
+        const text = input.value;
+
+        if (!text.trim()) return;
+
+        // User Message
+        const userMsgHTML = `
+                <div class="flex gap-2 max-w-[85%] self-end flex-row-reverse">
+                    <div class="bg-lapa-gold text-white p-3 rounded-2xl rounded-tr-none shadow-sm">
+                        <p class="text-sm">${text}</p>
+                    </div>
+                </div>
+            `;
+        messages.insertAdjacentHTML("beforeend", userMsgHTML);
+        input.value = "";
+        messages.scrollTop = messages.scrollHeight;
+
+        // Simulate Typing & Response
+        setTimeout(() => {
+          const aiResponseHTML = `
+                    <div class="flex gap-2 max-w-[85%]">
+                        <div class="w-8 h-8 bg-lapa-blue rounded-full flex items-center justify-center shrink-0 mt-1">
+                            <span class="text-white text-xs font-bold">LH</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm border border-slate-100">
+                            <p class="text-sm text-slate-700">Obrigado pela mensagem! Para te dar uma resposta precisa sobre "<strong>${text}</strong>", preciso verificar nossa base de dados. Um momento...</p>
+                        </div>
+                    </div>
+                `;
+          messages.insertAdjacentHTML("beforeend", aiResponseHTML);
+          messages.scrollTop = messages.scrollHeight;
+        }, 1000);
+      }
+    </script>
+  </body>
+</html>
