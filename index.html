@@ -51,23 +51,6 @@
         scroll-behavior: smooth;
       }
 
-      /* Chat Widget Animations */
-      @keyframes float {
-        0% {
-          transform: translateY(0px);
-        }
-        50% {
-          transform: translateY(-10px);
-        }
-        100% {
-          transform: translateY(0px);
-        }
-      }
-
-      .chat-float {
-        animation: float 3s ease-in-out infinite;
-      }
-
       /* Gallery Scrollbar Hide */
       .no-scrollbar::-webkit-scrollbar {
         display: none;
@@ -487,153 +470,39 @@
       </div>
     </footer>
 
-    <!-- AI CHAT WIDGET (Simulated) -->
-    <!-- Trigger Button -->
-    <div class="fixed bottom-6 right-6 z-40">
-      <button
-        onclick="toggleChat()"
-        class="chat-float bg-lapa-gold w-16 h-16 rounded-full flex items-center justify-center text-white shadow-2xl hover:bg-amber-700 transition-colors relative group"
-      >
-        <i class="fa-solid fa-comments text-2xl"></i>
-        <span
-          class="absolute -top-2 -right-2 bg-red-500 w-5 h-5 rounded-full text-[10px] font-bold flex items-center justify-center animate-pulse"
-          >1</span
-        >
-      </button>
-    </div>
+    <!-- EXTERNAL CHAT WIDGET INTEGRATION -->
+    <script type="module">
+      import Chatbox from "https://cdn.jsdelivr.net/npm/@chatvolt/embeds@latest/dist/chatbox/index.js";
 
-    <!-- Chat Interface -->
-    <div
-      id="ai-chat-window"
-      class="fixed bottom-24 right-6 w-[90%] md:w-[380px] bg-white rounded-2xl shadow-2xl z-50 hidden flex-col border border-slate-100 transform transition-all duration-300 origin-bottom-right scale-95 opacity-0"
-    >
-      <!-- Chat Header -->
-      <div
-        class="bg-lapa-blue p-4 rounded-t-2xl flex justify-between items-center"
-      >
-        <div class="flex items-center gap-3">
-          <div class="bg-white/20 p-2 rounded-full">
-            <i class="fa-solid fa-robot text-white"></i>
-          </div>
-          <div>
-            <h4 class="text-white font-bold font-heading text-sm">
-              Agente Lapa Hostel
-            </h4>
-            <p class="text-green-400 text-xs flex items-center gap-1">
-              <span class="w-2 h-2 bg-green-400 rounded-full"></span> Online
-            </p>
-          </div>
-        </div>
-        <button onclick="toggleChat()" class="text-white/70 hover:text-white">
-          <i class="fa-solid fa-times"></i>
-        </button>
-      </div>
-
-      <!-- Chat Body -->
-      <div
-        class="h-[350px] overflow-y-auto p-4 bg-slate-50 flex flex-col gap-3"
-        id="chat-messages"
-      >
-        <div class="text-center text-xs text-slate-400 my-2">Hoje</div>
-
-        <!-- Message AI -->
-        <div class="flex gap-2 max-w-[85%]">
-          <div
-            class="w-8 h-8 bg-lapa-blue rounded-full flex items-center justify-center shrink-0 mt-1"
-          >
-            <span class="text-white text-xs font-bold">LH</span>
-          </div>
-          <div
-            class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm border border-slate-100"
-          >
-            <p class="text-sm text-slate-700">
-              Olá! Bem-vindo ao Lapa Hostel Empresas. 🏢
-            </p>
-          </div>
-        </div>
-
-        <!-- Message AI Delay -->
-        <div class="flex gap-2 max-w-[85%]">
-          <div
-            class="w-8 h-8 bg-lapa-blue rounded-full flex items-center justify-center shrink-0 mt-1"
-          >
-            <span class="text-white text-xs font-bold">LH</span>
-          </div>
-          <div
-            class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm border border-slate-100"
-          >
-            <p class="text-sm text-slate-700">
-              Sou sua assistente virtual. Posso te ajudar com valores,
-              disponibilidade para grupos ou regras da casa. O que você precisa
-              saber?
-            </p>
-          </div>
-        </div>
-
-        <!-- Suggested Actions -->
-        <div class="flex flex-wrap gap-2 mt-2 ml-10">
-          <button
-            class="text-xs bg-lapa-gold/10 text-lapa-gold hover:bg-lapa-gold hover:text-white border border-lapa-gold/30 px-3 py-1.5 rounded-full transition-colors"
-          >
-            Valores para empresas
-          </button>
-          <button
-            class="text-xs bg-lapa-gold/10 text-lapa-gold hover:bg-lapa-gold hover:text-white border border-lapa-gold/30 px-3 py-1.5 rounded-full transition-colors"
-          >
-            Ver fotos
-          </button>
-          <button
-            class="text-xs bg-lapa-gold/10 text-lapa-gold hover:bg-lapa-gold hover:text-white border border-lapa-gold/30 px-3 py-1.5 rounded-full transition-colors"
-          >
-            Falar com humano
-          </button>
-        </div>
-      </div>
-
-      <!-- Chat Input -->
-      <div class="p-3 border-t border-slate-100 bg-white rounded-b-2xl">
-        <form
-          onsubmit="event.preventDefault(); sendMessage();"
-          class="flex gap-2"
-        >
-          <input
-            type="text"
-            id="chat-input"
-            placeholder="Digite sua dúvida..."
-            class="flex-1 bg-slate-100 border-none rounded-full px-4 py-2 text-sm focus:ring-2 focus:ring-lapa-gold outline-none"
-          />
-          <button
-            type="submit"
-            class="bg-lapa-blue text-white w-9 h-9 rounded-full flex items-center justify-center hover:bg-lapa-gold transition-colors"
-          >
-            <i class="fa-solid fa-paper-plane text-xs"></i>
-          </button>
-        </form>
-      </div>
-    </div>
+      // Initialize and assign to window so normal scripts can access it
+      window.chatWidget = await Chatbox.initBubble({
+        agentId: "cmjxgg3iv073att58pmf86t9f",
+      });
+    </script>
 
     <!-- SCRIPTS -->
     <script>
-      // Toggle Chat Logic
-      let isChatOpen = false;
-      const chatWindow = document.getElementById("ai-chat-window");
-
+      // Modified Logic to open external widget with state fix
       function toggleChat() {
-        isChatOpen = !isChatOpen;
-        if (isChatOpen) {
-          chatWindow.classList.remove("hidden");
-          // Small delay to allow display:block to apply before animating opacity
-          setTimeout(() => {
-            chatWindow.classList.remove("scale-95", "opacity-0");
-            chatWindow.classList.add("scale-100", "opacity-100");
-            document.getElementById("chat-input").focus();
-          }, 10);
+        if (window.chatWidget) {
+          // Estratégia de Reset: Força o fechamento (atualizando o estado interno se estiver "preso")
+          // e reabre imediatamente. Isso resolve o problema do "clique duplo" causado por desincronia
+          // quando o usuário fecha o chat manualmente pelo "X" do próprio widget.
+          if (
+            typeof window.chatWidget.close === "function" &&
+            typeof window.chatWidget.open === "function"
+          ) {
+            window.chatWidget.close();
+            setTimeout(() => {
+              window.chatWidget.open();
+            }, 100);
+          }
+          // Fallback para toggle se os métodos específicos não existirem
+          else if (typeof window.chatWidget.toggle === "function") {
+            window.chatWidget.toggle();
+          }
         } else {
-          chatWindow.classList.remove("scale-100", "opacity-100");
-          chatWindow.classList.add("scale-95", "opacity-0");
-          setTimeout(() => {
-            chatWindow.classList.add("hidden");
-          }, 300);
+          console.log("Aguardando carregamento do widget...");
         }
       }
 
@@ -646,43 +515,6 @@
         } else {
           container.scrollBy({ left: scrollAmount, behavior: "smooth" });
         }
-      }
-
-      // Mock Send Message Function
-      function sendMessage() {
-        const input = document.getElementById("chat-input");
-        const messages = document.getElementById("chat-messages");
-        const text = input.value;
-
-        if (!text.trim()) return;
-
-        // User Message
-        const userMsgHTML = `
-                <div class="flex gap-2 max-w-[85%] self-end flex-row-reverse">
-                    <div class="bg-lapa-gold text-white p-3 rounded-2xl rounded-tr-none shadow-sm">
-                        <p class="text-sm">${text}</p>
-                    </div>
-                </div>
-            `;
-        messages.insertAdjacentHTML("beforeend", userMsgHTML);
-        input.value = "";
-        messages.scrollTop = messages.scrollHeight;
-
-        // Simulate Typing & Response
-        setTimeout(() => {
-          const aiResponseHTML = `
-                    <div class="flex gap-2 max-w-[85%]">
-                        <div class="w-8 h-8 bg-lapa-blue rounded-full flex items-center justify-center shrink-0 mt-1">
-                            <span class="text-white text-xs font-bold">LH</span>
-                        </div>
-                        <div class="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm border border-slate-100">
-                            <p class="text-sm text-slate-700">Obrigado pela mensagem! Para te dar uma resposta precisa sobre "<strong>${text}</strong>", preciso verificar nossa base de dados. Um momento...</p>
-                        </div>
-                    </div>
-                `;
-          messages.insertAdjacentHTML("beforeend", aiResponseHTML);
-          messages.scrollTop = messages.scrollHeight;
-        }, 1000);
       }
     </script>
   </body>
